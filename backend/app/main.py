@@ -1,6 +1,7 @@
 from fastapi import FastAPI
 from starlette.middleware.cors import CORSMiddleware
 from starlette import status
+import subprocess
 
 app = FastAPI()
 app.add_middleware(
@@ -15,7 +16,8 @@ app.add_middleware(
 def root():
     return {"message": "Kestrel api"}
 
-@app.get("/api/user")
+@app.get("/api/monitor/cpu")
 def root(q=None):
-    print(q)
-    return {"message": "Kestrel api/user"}
+    result = subprocess.run(["../monitor/build/check_cpu_usage", get_usage], stdout=subprocess.PIPE, text=True)
+    output = result.stdout
+    return {"message": "CPU Usage: {output}%"}
