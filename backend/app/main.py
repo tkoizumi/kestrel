@@ -20,9 +20,11 @@ def root():
 
 @app.get("/api/monitor/cpu/{function_name}")
 def root(function_name: str):
+    result = subprocess.run(["../monitor/build/check_cpu_usage",
+                            function_name], stdout=subprocess.PIPE, text=True)
     return 0
     # try:
-    #     result = subprocess.run(["../monitor/build/check_cpu_usage", function_name], stdout=subprocess.PIPE, text=True)
+    #
     #     output = result.stdout
     #     return {"message": "CPU Usage: {output}%"}
     # except subprocess.CalledProcessError as e:
