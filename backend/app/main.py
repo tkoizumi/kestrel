@@ -16,11 +16,11 @@ app.add_middleware(
 def root():
     return {"message": "Kestrel api"}
 
-@app.get("/api/monitor/cpu")
-def root(q=None):
+@app.get("/api/monitor/cpu/{function_name}")
+def root(function_name:str):
     try:
-        result = subprocess.run(["../monitor/build/check_cpu_usage", get_usage], stdout=subprocess.PIPE, text=True)
+        result = subprocess.run(["../monitor/build/check_cpu_usage", function_name], stdout=subprocess.PIPE, text=True)
         output = result.stdout
-        return {"message": "CPU Usage: {output}%"}
+        return output 
     except subprocess.CalledProcessError as e:
         return {"error": str(e)}
