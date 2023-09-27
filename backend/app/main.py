@@ -21,6 +21,6 @@ def root(q=None):
     try:
         result = subprocess.run(["../monitor/build/check_cpu_usage", get_usage], stdout=subprocess.PIPE, text=True)
         output = result.stdout
-    return {"message": "CPU Usage: {output}%"}
+        return {"message": "CPU Usage: {output}%"}
     except subprocess.CalledProcessError as e:
         return {"error": str(e)}

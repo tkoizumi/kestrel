@@ -26,7 +26,5 @@ double get_usage()
 
 int main()
 {
-    double cpu_usage = get_usage();
-    printf("CPU Usage: %lf%%\n", cpu_usage);
     return 0;
 }
