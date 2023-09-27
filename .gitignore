@@ -1,5 +1,5 @@
 monitor/build/*
-
+.vscode
 
 /backend/**/__pycache__
 /backend/.env

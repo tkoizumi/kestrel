@@ -12,15 +12,18 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+
 @app.get("/api")
 def root():
     return {"message": "Kestrel api"}
 
+
 @app.get("/api/monitor/cpu/{function_name}")
-def root(function_name:str):
-    try:
-        result = subprocess.run(["../monitor/build/check_cpu_usage", function_name], stdout=subprocess.PIPE, text=True)
-        output = result.stdout
-        return {"message": "CPU Usage: {output}%"}
-    except subprocess.CalledProcessError as e:
-        return {"error": str(e)}
+def root(function_name: str):
+    return 0
+    # try:
+    #     result = subprocess.run(["../monitor/build/check_cpu_usage", function_name], stdout=subprocess.PIPE, text=True)
+    #     output = result.stdout
+    #     return {"message": "CPU Usage: {output}%"}
+    # except subprocess.CalledProcessError as e:
+    #     return {"error": str(e)}
