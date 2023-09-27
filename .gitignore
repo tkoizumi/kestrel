@@ -1,4 +1,4 @@
-/build/*
+monitor/build/*
 
 
 /backend/**/__pycache__
