@@ -1,0 +1,5 @@
+services:
+  backend:
+    image: squashataka/kestrel-backend
+    ports:
+      - 8000:8000
