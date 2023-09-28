@@ -4,7 +4,7 @@ import axios from 'axios';
 const Dashboard = () => {
     const [usage, setUsage] = useState([]);
     const getUsage = async () => {
-        const res = await axios.get('http://localhost:8000/api/monitor/cpu/get_usage');
+        const res = await axios.get('http://167.71.101.27:8000/api/monitor/cpu/get_usage');
         const data = res.data;
         setUsage(data.message);
     }
