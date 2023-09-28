@@ -20,9 +20,15 @@ def root():
 
 @app.get("/api/monitor/cpu/{function_name}")
 def root(function_name: str):
-    result = subprocess.run(["../monitor/build/check_cpu_usage",
-                            function_name], stdout=subprocess.PIPE, text=True)
-    return 0
+    path = "./monitor/build/check_cpu_usage"
+    # result = subprocess.run([path, function_name],stdout=subprocess.PIPE, text=True)
+    result = subprocess.run(
+        ["ls", "./monitor"], stdout=subprocess.PIPE, text=True)
+
+    # Print the output of the 'ls' command
+    print("Output of 'cd monitor && ls' command:")
+    print(result.stdout)
+    return result.stdout
     # try:
     #
     #     output = result.stdout
