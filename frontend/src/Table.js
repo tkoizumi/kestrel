@@ -1,29 +1,30 @@
 
-
-const Table = () => {
+const Table = (props) => {
+    const data = props.data;
+    console.log(data)
     return (
         <div>
             <h5></h5>
             <table className="table table-dark">
                 <thead>
                     <tr>
-                        <th>Process Name</th>
+                        <th>CMD</th>
                         <th>PID</th>
-                        <th>CPU %</th>
-                        <th>CPU Time</th>
-                        <th>Column 5</th>
+                        <th>User Time</th>
+                        <th>Nice Time</th>
+                        <th>System Time</th>
                     </tr>
                 </thead>
                 <tbody>
-                    {/* Add table rows with data here */}
-                    <tr>
-                        <td>Data 1</td>
-                        <td>Data 2</td>
-                        <td>Data 3</td>
-                        <td>Data 4</td>
-                        <td>Data 5</td>
-                    </tr>
-                    {/* Add more rows as needed */}
+                    {data.map((row) => (
+                        <tr key={row.pid}>
+                            <td>{row.cmd}</td>
+                            <td>{row.pid}</td>
+                            <td>{row.user}</td>
+                            <td>{row.nice}</td>
+                            <td>{row.system}</td>
+                        </tr>
+                    ))}
                 </tbody>
             </table>
         </div>
