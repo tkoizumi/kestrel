@@ -26,6 +26,6 @@ double get_usage()
 
 int main()
 {
-    printf("%lf\n", get_usage());
+    printf("%lf", get_usage());
     return 0;
 }

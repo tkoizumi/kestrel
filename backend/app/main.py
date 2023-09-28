@@ -26,4 +26,4 @@ def root(function_name: str):
 
     # Print the output of the 'ls' command
     # print("Output of 'cd monitor && ls' command:")
-    return result.stdout
+    return {"message": result.stdout}
