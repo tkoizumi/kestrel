@@ -7,25 +7,49 @@
 double get_usage()
 {
     FILE *file = fopen("/proc/stat", "r");
-    if (file == NULL)
-    {
+    if (file == NULL) {
         perror("Error opening /proc/stat");
         return 1;
     }
 
-    char line[BUFFER_SIZE];
-    fgets(line, sizeof(line), file);
-    unsigned long long user, nice, system, idle; // user: time spent in user mode, nice: time spent in niced (low priority) user processes, system: time spent in kernel mode, idle: time spent in idle state
-    sscanf(line + 5, "%llu %llu %llu %llu", &user, &nice, &system, &idle);
+    char line[256];
+    if (fgets(line, sizeof(line), file)) {
+        if (strncmp(line, "cpu ", 4) == 0) {
+            unsigned long long user, nice, system, idle;
+            sscanf(line + 5, "%llu %llu %llu %llu", &user, &nice, &system, &idle);
 
-    unsigned long long total_cpu_time = user + nice + system + idle;
-    double total_cpu_usage = (double)(total_cpu_time - idle) / total_cpu_time * 100;
+            unsigned long long total_cpu_time = user + nice + system + idle;
+            printf("total_cpu_usage: %.2lf%%\n", (double)(total_cpu_time - idle) / total_cpu_time * 100.0);
+        }
+    }
+
     fclose(file);
-    return total_cpu_usage;
+    // Now, let's list individual process CPU usage
+    printf("\nProcess CPU Usage:\n");
+    file = fopen("/proc/stat", "r");
+    if (file == NULL) {
+        perror("Error opening /proc/stat");
+        return 1;
+    }
+
+    while (fgets(line, sizeof(line), file)) {
+        int pid;
+        char comm[256];
+        unsigned long long user_time, nice_time, system_time, idle_time;
+        if (sscanf(line, "cpu %d %s %llu %llu %llu %llu", &pid, comm, &user_time, &nice_time, &system_time, &idle_time) == 6) {
+            unsigned long long total_cpu_time_p = user_time + nice_time + system_time + idle_time;
+            unsigned long long cpu_usage_p = (total_cpu_time_p - idle_time) / total_cpu_time_p * 100;
+            printf("pid: %d, cmd: %s, cpu_usage: %.2lf%%\n", pid, comm, (double)cpu_usage_p); 
+        }
+    }
+
+    fclose(file);
+    return 0;
 }
 
 int main()
 {
-    printf("%lf", get_usage());
+    get_usage();
     return 0;
+
 }
