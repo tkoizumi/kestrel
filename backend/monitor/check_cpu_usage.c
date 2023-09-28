@@ -19,13 +19,12 @@ double get_usage()
             sscanf(line + 5, "%llu %llu %llu %llu", &user, &nice, &system, &idle);
 
             unsigned long long total_cpu_time = user + nice + system + idle;
-            printf("total_cpu_usage: %.2lf%%\n", (double)(total_cpu_time - idle) / total_cpu_time * 100.0);
+            printf("%lf", (double)(total_cpu_time - idle) / total_cpu_time * 100.0);
         }
     }
 
     fclose(file);
     // Now, let's list individual process CPU usage
-    printf("\nProcess CPU Usage:\n");
     file = fopen("/proc/stat", "r");
     if (file == NULL) {
         perror("Error opening /proc/stat");
@@ -39,7 +38,7 @@ double get_usage()
         if (sscanf(line, "cpu %d %s %llu %llu %llu %llu", &pid, comm, &user_time, &nice_time, &system_time, &idle_time) == 6) {
             unsigned long long total_cpu_time_p = user_time + nice_time + system_time + idle_time;
             unsigned long long cpu_usage_p = (total_cpu_time_p - idle_time) / total_cpu_time_p * 100;
-            printf("pid: %d, cmd: %s, cpu_usage: %.2lf%%\n", pid, comm, (double)cpu_usage_p); 
+            printf("**%d,%s,%lf", pid, comm, (double)cpu_usage_p); 
         }
     }
 
