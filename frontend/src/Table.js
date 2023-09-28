@@ -3,8 +3,8 @@ const Table = (props) => {
     const data = props.data;
     console.log(data)
     return (
-        <div>
-            <h5></h5>
+        <div class="container mt-4">
+            <h5>All Processes</h5>
             <table className="table table-dark">
                 <thead>
                     <tr>
