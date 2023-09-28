@@ -9,7 +9,7 @@ def test(function_name: str):
         output = result.stdout
         return output
     except subprocess.CalledProcessError as e:
-        return {"error": str(e)}
+        return str(e)
 
 
 print("CPU Usage: ", test("get_usage"))

@@ -1,4 +1,4 @@
-monitor/build/*
+/backend/monitor/build/**
 .vscode
 
 /backend/**/__pycache__
