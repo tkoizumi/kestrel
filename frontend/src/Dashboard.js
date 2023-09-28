@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import axios from 'axios';
+import Table from './Table';
 
 const Dashboard = () => {
     const [usage, setUsage] = useState([]);
@@ -9,12 +10,15 @@ const Dashboard = () => {
         setUsage(data.message);
     }
     useEffect(() => {
-        getUsage();
+        const interval = setInterval(getUsage, 1500);
+        return () => clearInterval(interval)
     }, [])
     return (
-        <div>
-            <div>Dashboard</div>
+        <div className="container">
+            <div><h3>Dashboard</h3></div>
+            <div>Server IP: 167.71.101.27</div>
             <div>CPU Usage: {usage}%</div>
+            <div><Table /></div>
         </div>
 
     )
