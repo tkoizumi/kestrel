@@ -10,6 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+      - run: cd backend/monitor && rm -rf build && mkdir build && cd build && gcc ../check_cpu_usage.c -o check_cpu_usage
       - run: cd backend && docker build --platform linux/amd64 -t squashataka/kestrel-backend .
       - run: docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
         env:
