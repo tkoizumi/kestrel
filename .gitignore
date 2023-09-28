@@ -5,3 +5,5 @@
 /backend/.env
 /backend/env
 /backend/fastapienv/**
+.DS_Store
+backend/.DS_Store
