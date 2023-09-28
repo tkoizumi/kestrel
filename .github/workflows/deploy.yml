@@ -10,12 +10,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+      - run: cd frontend && docker build --platform linux/amd64 -t squashataka/kestrel-frontend .
       - run: cd backend/monitor && rm -rf build && mkdir build && cd build && gcc ../check_cpu_usage.c -o check_cpu_usage
       - run: cd backend && docker build --platform linux/amd64 -t squashataka/kestrel-backend .
       - run: docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
         env:
           DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
           DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+      - run: docker push squashataka/kestrel-frontend
       - run: docker push squashataka/kestrel-backend
       - name: copy file via ssh password
         uses: appleboy/scp-action@v0.1.3
@@ -37,5 +39,6 @@ jobs:
           key: ${{ secrets.SSH_KEY }}
           passphrase: ${{ secrets.DROPLET_PASSPHRASE }}
           script: |
+            sudo docker pull squashataka/kestrel-frontend
             sudo docker pull squashataka/kestrel-backend
             sudo docker-compose down && sudo docker-compose up -d

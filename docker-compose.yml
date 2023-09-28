@@ -1,4 +1,8 @@
 services:
+  frontend:
+    image: squashataka/kestrel-frontend
+    ports:
+      - 3000:3000
   backend:
     image: squashataka/kestrel-backend
     ports:
