@@ -4,7 +4,7 @@ const Table = (props) => {
     console.log(data)
     return (
         <div class="container mt-4">
-            <h5>All Processes</h5>
+            <h5>All Processes </h5>
             <table className="table table-dark">
                 <thead>
                     <tr>
