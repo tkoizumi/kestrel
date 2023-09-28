@@ -35,9 +35,43 @@ const Dashboard = () => {
     }, [])
     return (
         <div className="container">
-            <div><h3>Dashboard</h3></div>
-            <div>Server IP: 167.71.101.27</div>
-            <div>CPU Usage: {usage}%</div>
+            <div class="container mt-4">
+                <div class="row">
+                    <div class="col-md-12 text-center">
+                        <h1 class="display-4">Server Performance</h1>
+                        <p class="lead">A program to provide real-time information about your linux machines.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="container mt-5">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">Type of Server</h5>
+                                <p class="card-text">Ubuntu 22.04</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">Server Information</h5>
+                                <p class="card-text">IP Address: 167.71.101.27</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">CPU Usage</h5>
+                                <p class="card-text">{usage}%</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <div><Table data={arr} /></div>
         </div>
 

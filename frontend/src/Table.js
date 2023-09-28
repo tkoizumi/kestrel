@@ -10,9 +10,9 @@ const Table = (props) => {
                     <tr>
                         <th>CMD</th>
                         <th>PID</th>
-                        <th>User Time</th>
-                        <th>Nice Time</th>
-                        <th>System Time</th>
+                        <th>User Time (s)</th>
+                        <th>Nice Time (s)</th>
+                        <th>System Time (s)</th>
                     </tr>
                 </thead>
                 <tbody>

@@ -38,7 +38,7 @@ double get_usage()
         if (sscanf(line, "cpu %d %s %llu %llu %llu %llu", &pid, comm, &user_time, &nice_time, &system_time, &idle_time) == 6) {
             unsigned long long total_cpu_time_p = user_time + nice_time + system_time + idle_time;
             unsigned long long cpu_usage_p = (total_cpu_time_p - idle_time) / total_cpu_time_p * 100;
-            printf("**%d,%s,%llu,%llu,%llu", pid, comm, user_time,nice_time,system_time); 
+            printf("**%d,%s,%llu,%llu,%llu", pid, comm, user_time/100,nice_time/100,system_time/100); 
         }
     }
 
